@@ -15,10 +15,24 @@ public class NumbermGeneratorTest {
 	}
 
 	@Test
-	public void returnsCorrectCountOfRandomIntegers() {
-		int[] numbers = numGenerator.generateRandomIntegers(5);
-		int integerCount = numbers.length;
+	public void generateRandomIntegersReturnsCorrectNumberOfIntegers() {
+		int[] nums = numGenerator.generateRandomIntegers(5);
 
-		assertEquals(5, integerCount);
+		assertEquals(5, nums.length);
+	}
+	
+	@Test
+	public void generateOrderedIntegersReturnsCorrectNumberOfIntegers() {
+		int[] nums = numGenerator.generateOrderedIntegers(5);
+		assertEquals(5, nums.length);
+	}
+	
+	@Test
+	public void generateOrderedIntegersIncrementsBy1StartingAt1() {
+		int[] nums = numGenerator.generateOrderedIntegers(5);
+		
+		for (int i = 0; i < nums.length; i++ ) {
+			assertEquals(i + 1, nums[i]);
+		}
 	}
 }
