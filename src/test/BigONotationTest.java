@@ -13,15 +13,8 @@ public class BigONotationTest {
 		bigO = new BigONotation();
 	}
 
-	@Test(timeout = 1000)
-	public void nComparisonCompletes() {
-		bigO.nComparison(5);
-		System.out.println();
-	}
-
-	@Test(timeout = 1000)
-	public void nSquaredComparisonCompletes() {
-		bigO.nSquaredComparison(5);
-		System.out.println();
+	@Test(timeout = 60000)
+	public void comparisonsComplete() {
+		bigO.doComparisons();
 	}
 }
