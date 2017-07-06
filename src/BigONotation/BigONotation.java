@@ -12,12 +12,12 @@ public class BigONotation {
 		
 		nComparison();
 		nSquaredComparison();
-		logNComparisons();
+		logNComparison();
 	}
 
 	private void nComparison() {
-		System.out.println("ON Algorithim");
-		dataSize = 1000000;
+		System.out.println("ON Algorithm");
+		dataSize = 10000000;
 
 		for (int i = 0; i < iterations ; i++) {
 			displayNDetails(dataSize);
@@ -27,15 +27,17 @@ public class BigONotation {
 		System.out.println();
 	}
 	
-	private void displayNDetails(int size) {		
+	private void displayNDetails(int size) {
+		int[] nums = numGenerator.generateRandomIntegers(size);
+		
 		startTime = System.currentTimeMillis();
-		runNAlgorithim(numGenerator.generateRandomIntegers(size));
+		runNAlgorithm(nums);
 		endTime = System.currentTimeMillis();
 
 		printDetails(size, endTime - startTime);
 	}
 	
-	private void runNAlgorithim(int[] nums) {
+	private void runNAlgorithm(int[] nums) {
 		for (int i = 0; i < nums.length - 1; i++) {
 			nums[i] += 1;
 		}
@@ -46,9 +48,9 @@ public class BigONotation {
 	}
 
 	private void nSquaredComparison() {
-		System.out.println("ON^2 algorithim");
+		System.out.println("ON^2 Algorithm");
 
-		dataSize = 10000;
+		dataSize = 1000;
 
 		for (int i = 0; i < iterations; i++) {
 			displayNSquaredDetails(dataSize);
@@ -59,22 +61,73 @@ public class BigONotation {
 	}
 
 	private void displayNSquaredDetails(int size) {
+		int[] nums = numGenerator.generateRandomIntegers(size);
+		
 		startTime = System.currentTimeMillis();
-		runNSquaredAlgorithim(numGenerator.generateRandomIntegers(size));
+		runNSquaredAlgorithm(nums);
 		endTime = System.currentTimeMillis();
 
 		printDetails(size, endTime - startTime);
 	}
 
-	private void runNSquaredAlgorithim(int[] nums) {
+	private void runNSquaredAlgorithm(int[] nums) {
+		// This is bubble sort
+		int tempHolder;
+		
 		for (int i = nums.length - 1; i > 1; i--) {
 			for (int j = 0; j < i; j++) {
-				nums[j] += 1;
+				if (nums[ j ] > nums[ j + 1 ]) {
+					tempHolder = nums[ j ];
+					nums[ j ] = nums[ j+1 ];
+					nums[ j + 1 ] = tempHolder;
+				}
 			}
 		}
 	}
 	
-	private void logNComparisons() {
-		// TODO: Implement a binary search to show a log n complexity algorithm.
+	private void logNComparison() {		
+		System.out.println("log N Algorithm");
+		
+		dataSize = 10000000;
+		
+		for(int i = 0; i < 5; i++ ) {
+			displayLogNDetails(dataSize);
+			dataSize += dataSize;
+		}
+	}
+	
+	private void displayLogNDetails(int size) {
+		int[] orderedIntegers = numGenerator.generateOrderedIntegers(size);
+		int numToFind = numGenerator.getRandomIntegerBetween(orderedIntegers[0], orderedIntegers[orderedIntegers.length - 1]);
+		
+		startTime = System.currentTimeMillis();
+		runLogNAlgorithm(orderedIntegers, numToFind);
+		endTime = System.currentTimeMillis();
+
+		printDetails(size, endTime - startTime);
+	}
+	
+	private void runLogNAlgorithm(int[] orderedIntegers, int numToFind) {		
+		// This is a binary search
+		int firstIndex = 0;
+		int endIndex = orderedIntegers.length - 1;
+		int middleIndex;
+		
+		while(true) {
+			middleIndex = (firstIndex  + endIndex) / 2;
+
+			if (orderedIntegers[middleIndex] == numToFind) {
+				// Found number
+				break;
+			} else if (firstIndex == endIndex) {
+				// Number does not exist
+				break;
+			}
+			else if (orderedIntegers[middleIndex] > numToFind) {
+				endIndex = middleIndex - 1;
+			} else {
+				firstIndex = middleIndex + 1;
+			}
+		}
 	}
 }
