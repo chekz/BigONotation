@@ -35,4 +35,11 @@ public class NumbermGeneratorTest {
 			assertEquals(i + 1, nums[i]);
 		}
 	}
+	
+	@Test
+	public void getRandomIntegerReturnsIntegerBetweenMinAndMax() {
+		int numberBetween = numGenerator.getRandomIntegerBetween(0, 10);
+
+		assertTrue(numberBetween >= 0 && numberBetween <= 10);
+	}
 }
