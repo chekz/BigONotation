@@ -3,9 +3,10 @@ package BigONotation;
 import java.util.Random;
 
 public class NumberGenerator {
+	Random rand = new Random();
+	
 	public int[] generateRandomIntegers(int size) {
 		int[] randomNumbers = new int[size];
-		Random rand = new Random();
 
 		for (int i = 0; i < size; i++) {
 			randomNumbers[i] = rand.nextInt();
@@ -22,5 +23,9 @@ public class NumberGenerator {
 		}
 		
 		return orderedIntegers;
+	}
+	
+	public int getRandomIntegerBetween(int min, int max) {
+		return rand.nextInt(max - min) + min;
 	}
 }
